@@ -13,6 +13,40 @@
     <meta charset="UTF-8" />
     <link rel="profile" href="https://gmpg.org/xfn/11" />
     
+    <script type="text/javascript">
+      
+        function updateTimer() {
+            var selected_date = new Date("{{ objects.0.promo.isoformat }}");
+            
+            var currentDate = new Date();
+            var timeDifference = selected_date - currentDate;
+            
+            // Calculate days, hours, minutes, and seconds
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+
+            if(isNaN(selected_date)){
+                
+            }else{
+              try {
+                document.querySelector("#timer-1119394950 > span:nth-child(1)").innerHTML =hours.toString() +'<strong>hours</strong>'
+              document.querySelector("#timer-1119394950 > span:nth-child(2)").innerHTML =minutes.toString() +'<strong>min</strong>'
+              document.querySelector("#timer-1119394950 > span:nth-child(3)").innerHTML =seconds.toString() +'<strong>sec</strong>'
+              } catch (error) {
+                console.error(error);
+              }
+            }
+            
+        }
+
+        window.onload = function() {
+            updateTimer();
+            setInterval(updateTimer, 1000); // Update every second
+        };
+    </script>
 
     <title>Acceuil</title>
 
