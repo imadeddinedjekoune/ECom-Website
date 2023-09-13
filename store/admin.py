@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import Category, Subcategory, Product , Promotion , Product_Page_Left , Product_Page_Down
 from .models import Index_Page_UP , ScaledImage
-from .models import Wilaya , Commune , Client , Category_Acceuil
+from .models import Wilaya , Commune , Client , Category_Acceuil, ScaledImage
 
 
 admin.site.register(Category)
@@ -12,6 +12,8 @@ admin.site.register(Product)
 admin.site.register(Product_Page_Down)
 admin.site.register(Index_Page_UP)
 admin.site.register(Category_Acceuil)
+admin.site.register(ScaledImage)
+
 
 class Admin_limit_0(admin.ModelAdmin):
 	def has_add_permission(self, request):

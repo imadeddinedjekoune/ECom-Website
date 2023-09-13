@@ -1,6 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Product, ScaledImage
+from .models import Product, Promotion, ScaledImage
+
+
 
 @receiver(post_save, sender=Product)
 def scale_and_save_image(sender, instance, created, **kwargs):
@@ -84,4 +86,3 @@ def scale_and_save_image(sender, instance, created, **kwargs):
 
             except:
                 i = 0 
-        
