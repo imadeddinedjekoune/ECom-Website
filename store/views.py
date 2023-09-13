@@ -78,7 +78,10 @@ def product(request,product_name):
 
 	SmallD = processText2(product.small_description)
 	
-
+	val = processImages(product,thumbnails_queryset)
+	for v in val:
+		print(v)
+		print()
 
 	context = {
 		"Product":product,
@@ -116,14 +119,23 @@ def processImages(product,thumbnails_queryset):
 		product.image_10,
 	]
 
+	
 	zipped = []
-	for i in range(len(thumbnails_queryset)):
-		zipped.append([	
-			reel_images[i],
-			thumbnails_queryset[i].scaled_image_100x100,
-			thumbnails_queryset[i].scaled_image_510xH,
-			thumbnails_queryset[i].scaled_image_247x296
-		])
+
+	for i in range(len(reel_images)):
+		
+		for j in range(len(thumbnails_queryset)):
+			th = thumbnails_queryset[j].scaled_image_100x100.name.split("/")[-1].replace("scaled_100x100_","")
+			im = reel_images[i].name.split("/")[-1]
+			print(im,th)
+			if(th == im):
+				zipped.append([	
+				reel_images[i],
+				thumbnails_queryset[j].scaled_image_100x100,
+				thumbnails_queryset[j].scaled_image_510xH,
+				thumbnails_queryset[j].scaled_image_247x296
+			])
+
 	return zipped
 
 

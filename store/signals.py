@@ -74,7 +74,6 @@ def scale_and_save_image(sender, instance, created, **kwargs):
 
                 img = img.crop((left_crop, top_crop, right_crop, bottom_crop))
 
-
                 output = BytesIO()
                 img.save(output, format='JPEG')
                 output.seek(0)

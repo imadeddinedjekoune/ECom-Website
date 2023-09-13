@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from project.custom_storage import CustomFileSystemStorage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+DEFAULT_FILE_STORAGE = 'project.custom_storage.CustomFileSystemStorage'
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w)*0ted4v=9pv^!hqt91ni_&^kalts!1p6e!2t_+h!h@0$56()'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
@@ -34,6 +37,7 @@ ALLOWED_HOSTS = ["ecomm-webapp2-5aecb966c6f5.herokuapp.com" , "127.0.0.1" , "www
 # Application definition
 
 INSTALLED_APPS = [
+    'django_cleanup.apps.CleanupConfig',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store.apps.StoreConfig',
+
 ]
 
 MIDDLEWARE = [

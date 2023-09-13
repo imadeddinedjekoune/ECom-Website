@@ -25,6 +25,7 @@ class Category_Acceuil (models.Model):
 
 
 class Product(models.Model):
+    pixel = models.CharField(max_length=2000,blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
@@ -84,65 +85,131 @@ class Product(models.Model):
 
             for i in range(len(images)):
                 try:
-                    
                     if images[i] != old_images[i]:
-                        from PIL import Image
-                        from io import BytesIO
+                        if(old_images[i].name == "" and images[i] != ""):
+                            from PIL import Image
+                            from io import BytesIO
 
-                        img = Image.open(images[i])
-                        img = img.convert('RGB')
-                        img.thumbnail((100, 100)) 
+                            img = Image.open(images[i])
+                            img = img.convert('RGB')
+                            img.thumbnail((100, 100)) 
 
-                        output = BytesIO()
-                        img.save(output, format='JPEG')
-                        output.seek(0)
-                        scaled_image = ScaledImage.objects.filter(original_image=self)
-            
-            
-                        scaled_image[i].scaled_image_100x100.save(f"scaled_100x100_{images[i].name}", content=output)
+                            output = BytesIO()
+                            img.save(output, format='JPEG')
+                            output.seek(0)
+
+                            scaled_image = ScaledImage()
+                            scaled_image.original_image = old_instance
+                            
+                            scaled_image.scaled_image_100x100.save(f"scaled_100x100_{images[i].name}", content=output)
                         
+                            img = Image.open(images[i])
+                            img = img.convert('RGB')
+                            basewidth = 510
+                            wpercent = (basewidth/float(img.size[0]))
+                            hsize = int((float(img.size[1])*float(wpercent)))
+                            img = img.resize((basewidth,hsize), Image.Resampling.LANCZOS) 
 
-                        img = Image.open(images[i])
-                        img = img.convert('RGB')
-                        basewidth = 510
-                        wpercent = (basewidth/float(img.size[0]))
-                        hsize = int((float(img.size[1])*float(wpercent)))
-                        img = img.resize((basewidth,hsize), Image.Resampling.LANCZOS) 
+                            output = BytesIO()
+                            img.save(output, format='JPEG')
+                            output.seek(0)
+                            scaled_image.scaled_image_510xH.save(f"scaled_510xH_{images[i].name}", content=output)
+                            
 
-                        output = BytesIO()
-                        img.save(output, format='JPEG')
-                        output.seek(0)
-                        scaled_image[i].scaled_image_510xH.save(f"scaled_510xH_{images[i].name}", content=output)
+                            img = Image.open(images[i])
+                            img = img.convert('RGB')
+                            desired_height = 296
+                            hpercent = (desired_height / float(img.size[1]))
+                            wsize = int((float(img.size[0]) * float(hpercent)))
+                            img = img.resize((wsize, desired_height), Image.LANCZOS)
+
+                            per_side = (int((wsize-247)/2))
+                            right = per_side
+                            left = per_side + (wsize-247)%2
+
+                            left_crop = left
+                            top_crop = 0
+                            right_crop = wsize - right 
+                            bottom_crop = desired_height
+
+                            img = img.crop((left_crop, top_crop, right_crop, bottom_crop))
+
+
+                            output = BytesIO()
+                            img.save(output, format='JPEG')
+                            output.seek(0)
+                            scaled_image.scaled_image_247x296.save(f"scaled_247x296_{images[i].name}", content=output)
+
+
+                            scaled_image.save()
+
+                        else:
+                            if(old_images[i].name != "" and images[i] == ""):
+                                scaled_image = ScaledImage.objects.filter(original_image=self)
+                                print(scaled_image[i])
+                                scaled_image[i].delete()
+                            else:
+                                from PIL import Image
+                                from io import BytesIO
+
+                                img = Image.open(images[i])
+                                img = img.convert('RGB')
+                                img.thumbnail((100, 100)) 
+
+                                output = BytesIO()
+                                img.save(output, format='JPEG')
+                                output.seek(0)
+                                scaled_image = ScaledImage.objects.filter(original_image=self)
+                    
+                    
+                                scaled_image[i].scaled_image_100x100.save(f"scaled_100x100_{images[i].name}", content=output)
+                                
+
+                                img = Image.open(images[i])
+                                img = img.convert('RGB')
+                                basewidth = 510
+                                wpercent = (basewidth/float(img.size[0]))
+                                hsize = int((float(img.size[1])*float(wpercent)))
+                                img = img.resize((basewidth,hsize), Image.Resampling.LANCZOS) 
+
+                                output = BytesIO()
+                                img.save(output, format='JPEG')
+                                output.seek(0)
+                                scaled_image[i].scaled_image_510xH.save(f"scaled_510xH_{images[i].name}", content=output)
+                                
+
+                                img = Image.open(images[i])
+                                img = img.convert('RGB')
+                                desired_height = 296
+                                hpercent = (desired_height / float(img.size[1]))
+                                wsize = int((float(img.size[0]) * float(hpercent)))
+                                img = img.resize((wsize, desired_height), Image.LANCZOS)
+
+                                per_side = (int((wsize-247)/2))
+                                right = per_side
+                                left = per_side + (wsize-247)%2
+
+                                left_crop = left
+                                top_crop = 0
+                                right_crop = wsize - right 
+                                bottom_crop = desired_height
+
+                                img = img.crop((left_crop, top_crop, right_crop, bottom_crop))
+
+
+                                output = BytesIO()
+                                img.save(output, format='JPEG')
+                                output.seek(0)
+                                scaled_image[i].scaled_image_247x296.save(f"scaled_247x296_{images[i].name}", content=output)
+
+                                scaled_image[i].save()
+
+
                         
-
-                        img = Image.open(images[i])
-                        img = img.convert('RGB')
-                        desired_height = 296
-                        hpercent = (desired_height / float(img.size[1]))
-                        wsize = int((float(img.size[0]) * float(hpercent)))
-                        img = img.resize((wsize, desired_height), Image.LANCZOS)
-
-                        per_side = (int((wsize-247)/2))
-                        right = per_side
-                        left = per_side + (wsize-247)%2
-
-                        left_crop = left
-                        top_crop = 0
-                        right_crop = wsize - right 
-                        bottom_crop = desired_height
-
-                        img = img.crop((left_crop, top_crop, right_crop, bottom_crop))
-
-
-                        output = BytesIO()
-                        img.save(output, format='JPEG')
-                        output.seek(0)
-                        scaled_image[i].scaled_image_247x296.save(f"scaled_247x296_{images[i].name}", content=output)
-
-                        scaled_image[i].save()
                     
                         
                 except Exception as e:
+                    print(e)
                     pass
 
                 
@@ -162,19 +229,19 @@ class Promotion(models.Model):
 
 
 class Product_Page_Left(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.product.name
 
 class Product_Page_Down(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.product.name
 
 class Index_Page_UP(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.product.name
