@@ -26,46 +26,12 @@
     </script>
     <title>{{Product.name}} - Gzagzi</title>
 
-    <!-- All in One SEO 4.3.1.1 - aioseo.com -->
-    <meta
-      name="description"
-      content="Le asus zenbook 2021 embarque un processeur Intel i7 de 11eme génération et GPU intel iris uhd, couplé d’une mémoire RAM 16 Go DDR4X et 1000 go SSD de stockage , avec un écran Amoled IPS . Côté autonomie, sa batterie permet 5 heures de lecture de vidéo (en 1080p)."
-    />
-    <meta name="robots" content="max-image-preview:large" />
+    
     <link
       rel="canonical"
       href="https://oktobit.store/product/asus-zenbook-14-amoled-2022/"
     />
-    <meta name="generator" content="All in One SEO (AIOSEO) 4.3.1.1 " />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:site_name" content="Oktobit - For you and everyone" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="{{Product.name}} - Gzagzi" />
-    <meta
-      property="og:description"
-      content="Le asus zenbook 2021 embarque un processeur Intel i7 de 11eme génération et GPU intel iris uhd, couplé d’une mémoire RAM 16 Go DDR4X et 1000 go SSD de stockage , avec un écran Amoled IPS . Côté autonomie, sa batterie permet 5 heures de lecture de vidéo (en 1080p)."
-    />
-    <meta
-      property="og:url"
-      content="https://oktobit.store/product/asus-zenbook-14-amoled-2022/"
-    />
-    <meta
-      property="article:published_time"
-      content="2023-08-16T22:57:51+00:00"
-    />
-    <meta
-      property="article:modified_time"
-      content="2023-08-16T23:03:33+00:00"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="{{Product.name}} - Gzagzi"
-    />
-    <meta
-      name="twitter:description"
-      content="Le asus zenbook 2021 embarque un processeur Intel i7 de 11eme génération et GPU intel iris uhd, couplé d’une mémoire RAM 16 Go DDR4X et 1000 go SSD de stockage , avec un écran Amoled IPS . Côté autonomie, sa batterie permet 5 heures de lecture de vidéo (en 1080p)."
-    />
+    
     
     <!-- All in One SEO -->
 
@@ -740,8 +706,7 @@
       type="application/wlwmanifest+xml"
       href="https://oktobit.store/wp-includes/wlwmanifest.xml"
     />
-    <meta name="generator" content="WordPress 6.0.5" />
-    <meta name="generator" content="WooCommerce 7.0.0" />
+
     <link rel="shortlink" href="https://oktobit.store/?p=3342" />
     <link
       rel="alternate"
@@ -1240,6 +1205,13 @@
     {% if Product.pixel != None %}
     {{Product.pixel|safe}}
     {% endif %}
+
+
+
+    <meta property="og:title" content="My Awesome Website">
+    <meta property="og:description" content="Explore the awesomeness of my website!">
+    <meta property="og:image" content="{% static 'image/PImage.jpg' %}">
+    <meta property="og:url" content="https://www.example.com">
 
   </head>
 
@@ -1888,12 +1860,12 @@
                     {% if Product.promotion != 0 %}
                     <div class="price-wrapper">
                       <p class="price product-page-price price-on-sale">
-                      <del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">د.ج</span>&nbsp;{{prix}}</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">د.ج</span>&nbsp;{{prix_prom}}</bdi></span></ins></p>
+                      <del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">ﺝ.ﺩ</span>&nbsp;{{prix}}</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">ﺝ.ﺩ</span>&nbsp;{{prix_prom}}</bdi></span></ins></p>
                     </div>
                     {% else %}
                     <div class="price-wrapper">
                       <p class="price product-page-price price-on-sale">
-                      <del aria-hidden="true"><span class="woocommerce-Price-amount amount"></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">د.ج</span>&nbsp;{{prix}}</bdi></span></ins></p>
+                      <del aria-hidden="true"><span class="woocommerce-Price-amount amount"></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">ﺝ.ﺩ</span>&nbsp;{{prix}}</bdi></span></ins></p>
                     </div>
                     {% endif %}
                     
@@ -1937,7 +1909,7 @@ text-align:right;" >
                               <input type="hidden" name="prix" value="{{prix_prom}}">
 
                               <p class="price product-page-price price-on-sale">
-                                <del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">د.ج</span>&nbsp;{{prix}}</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">د.ج</span>&nbsp;{{prix_prom}}</bdi></span></ins>
+                                <del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">ﺝ.ﺩ</span>&nbsp;{{prix}}</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">ﺝ.ﺩ</span>&nbsp;{{prix_prom}}</bdi></span></ins>
                               </p>
                               {% else %}
                               <input type="hidden" name="prix" value="{{prix}}">
