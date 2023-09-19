@@ -31,7 +31,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = ["ecomm-webapp2-5aecb966c6f5.herokuapp.com" , "127.0.0.1" , "www.gzagzi.com" ,"gzagzi.com" ]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
